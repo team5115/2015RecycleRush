@@ -14,12 +14,19 @@ public class RobotMap {
 	//Chassis
 	public static final int leftMotor = 0;
 	public static final int rightMotor = 1;
-	public static final double throttleInterval = 0.1;
+	public static final double autoSpeed = 0.3;
+	public static final double speedFactor = .75;
+	public static final int leftEncoder1 = 0;
+	public static final int leftEncoder2 = 1;
+	public static final int rightEncoder1 = 2;
+	public static final int rightEncoder2 = 3;
+	public static final int toteDetector = 4;
+	public static final double circumference = 84.371;
 	
 	//Winch
 	public static final int winch = 2;
-	public static final int limitTop = 0;
-	public static final int limitBottom = 1;
+	public static final int limitTop = 5;
+	public static final int limitBottom = 6;
 	public static final double winchSpeed = 0.1;
 	
 	//Pneumatics

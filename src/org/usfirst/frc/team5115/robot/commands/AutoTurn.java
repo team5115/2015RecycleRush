@@ -9,19 +9,21 @@ import org.usfirst.frc.team5115.robot.RobotMap;
 /**
  *
  */
-public class Throttle extends Command {
+public class AutoTurn extends Command {
 	
-	private int dir;
+	private int degrees = 0;
 
-    public Throttle(int d) {
+    public AutoTurn(int d) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
-        dir = d;
+        
+        degrees = d;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.throttleShift(dir);
+    	Robot.chassis.startEncoders();
+    	Robot.chassis.drive(RobotMap.autoSpeed, -RobotMap.autoSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,11 +32,12 @@ public class Throttle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return Robot.chassis.rightDist() / RobotMap.circumference >= degrees / 360;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.chassis.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

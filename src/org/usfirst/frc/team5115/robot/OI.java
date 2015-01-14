@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5115.robot.commands.Drop;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
 import org.usfirst.frc.team5115.robot.commands.Kill;
 import org.usfirst.frc.team5115.robot.commands.MoveWinch;
-import org.usfirst.frc.team5115.robot.commands.Throttle;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -23,8 +23,6 @@ public class OI {
 	Button grab;
 	Button upWinch;
 	Button downWinch;
-	Button upSpeed;
-	Button downSpeed;
 	Button kill;
 	
 	public OI() {
@@ -33,29 +31,28 @@ public class OI {
 		grab = new JoystickButton(joy, 1);
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
-		upSpeed = new JoystickButton(joy, 6);
-		downSpeed = new JoystickButton(joy, 4);
 		kill = new JoystickButton(joy, 11);
 		
 		// Link the buttons to commands
-		grab.whileHeld(new Grab());
-		
+		grab.whenPressed(new Grab());
+		grab.whenReleased(new Drop());
 		upWinch.whenPressed(new MoveWinch(1));
 		downWinch.whenPressed(new MoveWinch(-1));
 		upWinch.whenReleased(new HoldWinch());
 		downWinch.whenReleased(new HoldWinch());
 		
-		upSpeed.whenReleased(new Throttle(1));
-		downSpeed.whenReleased(new Throttle(-1));
 		kill.whenPressed(new Kill());
 	}
 	
 	// Return speeds for each side (not including throttle) for the StickDrive command
 	public double leftSpeed() {
-		return (joy.getY() - joy.getX());
+		return (-1 * joy.getY() - joy.getX());
 	}
 	public double rightSpeed() {
-		return (joy.getY() + joy.getX());
+		return (-1 * joy.getY() + joy.getX());
+	}
+	public double throttle() {
+		return -0.5 * (joy.getThrottle() - 1);
 	}
 	
     //// CREATING BUTTONS
