@@ -5,6 +5,7 @@ import org.usfirst.frc.team5115.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,12 +18,15 @@ public class Winch extends Subsystem {
 	private Victor winchMotor;
 	private DigitalInput limitTop;
 	private DigitalInput limitBottom;
+	private Ultrasonic rangeFinder;
 	public int dir = 1;
 	
 	public Winch() {
 		winchMotor = new Victor(RobotMap.winch);
 		limitTop = new DigitalInput(RobotMap.limitTop);
 		limitBottom = new DigitalInput(RobotMap.limitBottom);
+		rangeFinder = new Ultrasonic(RobotMap.rangeFinderTrigger, RobotMap.rangeFinderEcho);
+		rangeFinder.setAutomaticMode(true);
 	}
     
     // Put methods for controlling this subsystem
@@ -31,6 +35,10 @@ public class Winch extends Subsystem {
 	// returns a boolean for if it has hit the limit switch in its direction of travel
 	public boolean hitLimit() {
 		return limitTop.get() && dir == 1 || limitBottom.get() && dir == -1;
+	}
+	
+	public double distToTop() {
+		return rangeFinder.getRangeInches();
 	}
 	
 	// starts moving if there is room and updates the direction of travel

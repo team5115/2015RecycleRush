@@ -31,8 +31,8 @@ public class Chassis extends Subsystem {
         
         leftEncoder = new Encoder(RobotMap.leftEncoder1, RobotMap.leftEncoder2, true, EncodingType.k4X);
         rightEncoder = new Encoder(RobotMap.rightEncoder1, RobotMap.rightEncoder2, true, EncodingType.k4X);
-        leftEncoder.setDistancePerPulse(12.566);
-        rightEncoder.setDistancePerPulse(12.566);
+        leftEncoder.setDistancePerPulse(12.566 / 4);
+        rightEncoder.setDistancePerPulse(12.566 / 4);
         
         toteDetector = new DigitalInput(RobotMap.toteDetector);
         

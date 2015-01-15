@@ -9,35 +9,40 @@ import org.usfirst.frc.team5115.robot.RobotMap;
 /**
  *
  */
-public class AutoTurn extends Command {
+public class AutoEnd extends Command {
+	
+	private double dist;
 
-	private int degrees = 0;
-
-    public AutoTurn(int d) {
+    public AutoEnd(double d) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         
-        degrees = d;
+        dist = d;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	if (degrees > 0) {Robot.chassis.drive(RobotMap.autoSpeed, -RobotMap.autoSpeed); }
-    	if (degrees < 0) {Robot.chassis.drive(-RobotMap.autoSpeed, RobotMap.autoSpeed); }
+    	if (dist > 0) { Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed); }
+    	if (dist < 0) { Robot.chassis.drive(-1 * RobotMap.autoSpeed, -1 * RobotMap.autoSpeed); }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.rightDist() / RobotMap.circumference >= degrees / 360;
+        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.chassis.startEncoders();
+    	while ((Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= 2) {
+    		Robot.chassis.drive(-.2 * RobotMap.autoSpeed, -.2 * RobotMap.autoSpeed);
+    	}
     	Robot.chassis.drive(0, 0);
     }
 

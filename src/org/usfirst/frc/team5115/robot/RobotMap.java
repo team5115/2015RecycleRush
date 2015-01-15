@@ -28,10 +28,13 @@ public class RobotMap {
 	public static final int limitTop = 5;
 	public static final int limitBottom = 6;
 	public static final double winchSpeed = 0.1;
+	public static final int rangeFinderTrigger = 7;
+	public static final int rangeFinderEcho = 8;
 	
 	//Pneumatics
 	public static final int solForward = 0;
 	public static final int solReverse = 1;
+	public static final int armLength = 20;
     
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
