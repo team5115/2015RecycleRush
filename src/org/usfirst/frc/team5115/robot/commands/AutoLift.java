@@ -4,41 +4,42 @@ package org.usfirst.frc.team5115.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5115.robot.Robot;
-import org.usfirst.frc.team5115.robot.RobotMap;
 
 /**
  *
  */
-public class AutoEnd extends Command {
+public class AutoLift extends Command {
 	
-	private double dist;
+	private double initHeight;
+	private double height;
 
-    public AutoEnd(double d) {
+    public AutoLift(double h) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.chassis);
+        requires(Robot.pneumatic);
+        requires(Robot.winch);
         
-        dist = d;
+        initHeight = Robot.winch.heightFromTop();
+        height = h;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.startEncoders();
-    	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	Robot.pneumatic.in();
+    	Robot.winch.move(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+        return Robot.winch.heightFromTop() - initHeight >= height;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.drive(0, 0);
+    	Robot.winch.hold();
     }
 
     // Called when another command which requires one or more of the same

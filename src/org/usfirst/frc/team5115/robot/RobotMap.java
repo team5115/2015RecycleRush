@@ -27,6 +27,8 @@ public class RobotMap {
 	public static final int winch = 2;
 	public static final int limitTop = 5;
 	public static final int limitBottom = 6;
+	public static final int ultrasonicTrigger = 7;
+	public static final int ultrasonicEcho = 8;
 	public static final double winchSpeed = 0.1;
 	public static final int rangeFinderTrigger = 7;
 	public static final int rangeFinderEcho = 8;

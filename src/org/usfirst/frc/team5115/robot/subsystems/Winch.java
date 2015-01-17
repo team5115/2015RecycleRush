@@ -18,15 +18,14 @@ public class Winch extends Subsystem {
 	private Victor winchMotor;
 	private DigitalInput limitTop;
 	private DigitalInput limitBottom;
-	private Ultrasonic rangeFinder;
+	private Ultrasonic ultra;
 	public int dir = 1;
 	
 	public Winch() {
 		winchMotor = new Victor(RobotMap.winch);
 		limitTop = new DigitalInput(RobotMap.limitTop);
 		limitBottom = new DigitalInput(RobotMap.limitBottom);
-		rangeFinder = new Ultrasonic(RobotMap.rangeFinderTrigger, RobotMap.rangeFinderEcho);
-		rangeFinder.setAutomaticMode(true);
+		ultra = new Ultrasonic(RobotMap.ultrasonicTrigger, RobotMap.ultrasonicEcho);
 	}
     
     // Put methods for controlling this subsystem
@@ -34,11 +33,7 @@ public class Winch extends Subsystem {
 	
 	// returns a boolean for if it has hit the limit switch in its direction of travel
 	public boolean hitLimit() {
-		return limitTop.get() && dir == 1 || limitBottom.get() && dir == -1;
-	}
-	
-	public double distToTop() {
-		return rangeFinder.getRangeInches();
+		return !limitTop.get() && dir == 1 || !limitBottom.get() && dir == -1;
 	}
 	
 	// starts moving if there is room and updates the direction of travel
@@ -49,8 +44,12 @@ public class Winch extends Subsystem {
 	
 	// reverses until the limit switch is no longer pressed and stops the motor
 	public void hold() {
-		while (hitLimit()) { winchMotor.set(-0.1 * dir); }
+		while (hitLimit()) { winchMotor.set(-0.1 * RobotMap.winchSpeed * dir); }
 		winchMotor.set(0);
+	}
+	
+	public double heightFromTop() {
+		return ultra.getRangeInches();
 	}
 
     public void initDefaultCommand() {

@@ -46,6 +46,8 @@ public class Robot extends IterativeRobot {
         autonomousCommand = new ExampleCommand();
         sd = new StickDrive();
         wc = new WinchChecker();
+        
+        System.out.println("Started robot");
     }
 	
 	public void disabledPeriodic() {
@@ -55,6 +57,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        wc.start();
     }
 
     /**
@@ -71,6 +74,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         sd.start();	// start driving
+        wc.start();
         
         System.out.println("Entered Teleop mode");
     }
@@ -88,7 +92,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println("teleop running");
         
         SmartDashboard.putBoolean("Winch switch", winch.hitLimit());
         SmartDashboard.putNumber("Winch dir", winch.dir);

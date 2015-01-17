@@ -11,6 +11,8 @@ import org.usfirst.frc.team5115.robot.commands.HoldWinch;
 import org.usfirst.frc.team5115.robot.commands.Kill;
 import org.usfirst.frc.team5115.robot.commands.MoveWinch;
 
+import java.lang.Math;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -46,10 +48,20 @@ public class OI {
 	
 	// Return speeds for each side (not including throttle) for the StickDrive command
 	public double leftSpeed() {
-		return (-1 * joy.getY() - joy.getX());
+		SmartDashboard.putNumber("Joystick Y", joy.getY());
+		SmartDashboard.putNumber("Joystick X", joy.getX());
+		if (Math.abs(joy.getY()) > 0.11 || Math.abs(joy.getX()) > 0.11) {
+			return (-1 * joy.getY() - joy.getX());
+		} else {
+			return 0;
+		}
 	}
 	public double rightSpeed() {
-		return (-1 * joy.getY() + joy.getX());
+		if (Math.abs(joy.getY()) > 0.11 || Math.abs(joy.getX()) > 0.11) {
+			return (-1 * joy.getY() + joy.getX());
+		} else {
+			return 0;
+		}
 	}
 	public double throttle() {
 		return -0.5 * (joy.getThrottle() - 1);
