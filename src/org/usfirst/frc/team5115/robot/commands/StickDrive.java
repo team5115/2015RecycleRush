@@ -21,7 +21,10 @@ public class StickDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.drive(Robot.oi.leftSpeed(), Robot.oi.rightSpeed());
+    	Robot.chassis.leftSpeed += Math.signum(Robot.oi.leftSpeed() - Robot.chassis.leftSpeed) * 0.01;
+    	Robot.chassis.rightSpeed += Math.signum(Robot.oi.rightSpeed() - Robot.chassis.rightSpeed) * 0.01;
+    	
+    	Robot.chassis.drive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
