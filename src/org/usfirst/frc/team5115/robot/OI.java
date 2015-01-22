@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5115.robot.commands.AutoLift;
 import org.usfirst.frc.team5115.robot.commands.Drop;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
@@ -26,6 +27,7 @@ public class OI {
 	Button upWinch;
 	Button downWinch;
 	Button kill;
+	Button raiseHeightOfTote;
 	
 	public OI() {
 		// Definitions: assign buttons to their numbers on the controller
@@ -34,6 +36,7 @@ public class OI {
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
 		kill = new JoystickButton(joy, 11);
+		raiseHeightOfTote = new JoystickButton(joy, 12);
 		
 		// Link the buttons to commands
 		grab.whenPressed(new Grab());
@@ -44,6 +47,8 @@ public class OI {
 		downWinch.whenReleased(new HoldWinch());
 		
 		kill.whenPressed(new Kill());
+		
+		raiseHeightOfTote.whenReleased(new AutoLift(14));
 	}
 	
 	// Return speeds for each side (not including throttle) for the StickDrive command
