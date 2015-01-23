@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Chassis extends Subsystem {
 	
-	public int leftSpeed = 0;
-	public int rightSpeed = 0;
+	public double leftSpeed = 0;
+	public double rightSpeed = 0;
 	private double throttle;
     private Victor rightMotor;
     private Victor leftMotor;
@@ -42,7 +42,7 @@ public class Chassis extends Subsystem {
         rightEncoder.reset();
     }
     
-    public void drive() {
+    public void driveTele() {
     	throttle = Robot.oi.throttle();
     	
         leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor);
@@ -51,6 +51,21 @@ public class Chassis extends Subsystem {
         if (leftSpeed * throttle < -1) { leftMotor.set(1); }
         if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
         if (rightSpeed * throttle < -1) { rightMotor.set(1); }
+        
+        SmartDashboard.putNumber("Throttle", throttle);
+        SmartDashboard.putNumber("Left Speed", leftMotor.get());
+        SmartDashboard.putNumber("Right Speed", rightMotor.get());
+    }
+    
+    public void drive(double left, double right) {
+    	throttle = Robot.oi.throttle();
+    	
+    	leftMotor.set(left * throttle * RobotMap.speedFactor);
+        rightMotor.set(right * throttle * RobotMap.speedFactor);
+        if (left * throttle > 1) { leftMotor.set(-1); }
+        if (left * throttle < -1) { leftMotor.set(1); }
+        if (right * throttle > 1) { rightMotor.set(-1); }
+        if (right * throttle < -1) { rightMotor.set(1); }
         
         SmartDashboard.putNumber("Throttle", throttle);
         SmartDashboard.putNumber("Left Speed", leftMotor.get());

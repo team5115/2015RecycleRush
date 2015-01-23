@@ -9,7 +9,6 @@ import org.usfirst.frc.team5115.robot.commands.AutoLift;
 import org.usfirst.frc.team5115.robot.commands.Drop;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
-import org.usfirst.frc.team5115.robot.commands.Kill;
 import org.usfirst.frc.team5115.robot.commands.MoveWinch;
 
 import java.lang.Math;
@@ -26,7 +25,6 @@ public class OI {
 	Button grab;
 	Button upWinch;
 	Button downWinch;
-	Button kill;
 	Button raiseHeightOfTote;
 	
 	public OI() {
@@ -35,7 +33,6 @@ public class OI {
 		grab = new JoystickButton(joy, 1);
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
-		kill = new JoystickButton(joy, 11);
 		raiseHeightOfTote = new JoystickButton(joy, 12);
 		
 		// Link the buttons to commands
@@ -46,7 +43,6 @@ public class OI {
 		upWinch.whenReleased(new HoldWinch());
 		downWinch.whenReleased(new HoldWinch());
 		
-		kill.whenPressed(new Kill());
 		
 		raiseHeightOfTote.whenReleased(new AutoLift(14));
 	}
