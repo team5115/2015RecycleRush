@@ -39,13 +39,16 @@ public class DriveComp extends Command {
     		distFinRight = Robot.chassis.rightDist();
     		speedLeft = distFinLeft - distInitLeft;
     		speedRight = distFinRight - distInitRight;
-    		speedFactorLeft = speedLeft / Robot.chassis.leftSpeed;
-    		speedFactorRight = speedRight / Robot.chassis.rightSpeed;
     		
-    		if (speedFactorLeft > speedFactorRight)
-    			Robot.chassis.leftOffset += (speedFactorLeft - speedFactorRight) / speedFactorLeft;
-    		if (speedFactorLeft < speedFactorRight)
-    			Robot.chassis.rightOffset += (speedFactorRight - speedFactorLeft) / speedFactorRight;
+    		if (Robot.chassis.leftSpeed != 0 && Robot.chassis.rightSpeed != 0) {
+	    		speedFactorLeft = speedLeft / Robot.chassis.leftSpeed;
+	    		speedFactorRight = speedRight / Robot.chassis.rightSpeed;
+	    		
+	    		if (speedFactorLeft > speedFactorRight)
+	    			Robot.chassis.leftOffset += (speedFactorLeft - speedFactorRight) / speedFactorLeft;
+	    		if (speedFactorLeft < speedFactorRight)
+	    			Robot.chassis.rightOffset += (speedFactorRight - speedFactorLeft) / speedFactorRight;
+    		}
     		
         	distInitLeft = Robot.chassis.leftDist();
         	distInitRight = Robot.chassis.rightDist();
