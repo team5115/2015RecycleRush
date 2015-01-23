@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.ExampleCommand;
-import org.usfirst.frc.team5115.robot.commands.HoldWinch;
 import org.usfirst.frc.team5115.robot.commands.StickDrive;
 import org.usfirst.frc.team5115.robot.commands.WinchChecker;
 import org.usfirst.frc.team5115.robot.subsystems.Chassis;
@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     StickDrive sd;
     WinchChecker wc;
+    DriveComp dc;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -46,6 +47,7 @@ public class Robot extends IterativeRobot {
         autonomousCommand = new ExampleCommand();
         sd = new StickDrive();
         wc = new WinchChecker();
+        dc = new DriveComp();
         
         System.out.println("Started robot");
     }
@@ -58,6 +60,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
         wc.start();
+        dc.start();
     }
 
     /**
@@ -75,6 +78,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         sd.start();	// start driving
         wc.start();
+        dc.start();
         
         System.out.println("Entered Teleop mode");
     }

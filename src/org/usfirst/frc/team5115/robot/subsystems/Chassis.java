@@ -17,6 +17,8 @@ public class Chassis extends Subsystem {
 	
 	public double leftSpeed = 0;
 	public double rightSpeed = 0;
+	public double leftOffset = 0;
+	public double rightOffset = 0;
 	private double throttle;
     private Victor rightMotor;
     private Victor leftMotor;
@@ -42,30 +44,30 @@ public class Chassis extends Subsystem {
         rightEncoder.reset();
     }
     
-    public void driveTele() {
+    public void drive(double left, double right) {
     	throttle = Robot.oi.throttle();
     	
-        leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor);
-        rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor);
-        if (leftSpeed * throttle > 1) { leftMotor.set(-1); }
-        if (leftSpeed * throttle < -1) { leftMotor.set(1); }
-        if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
-        if (rightSpeed * throttle < -1) { rightMotor.set(1); }
+    	leftMotor.set(left * throttle * RobotMap.speedFactor - leftOffset);
+        rightMotor.set(right * throttle * RobotMap.speedFactor - rightOffset);
+        if (left * throttle > 1) { leftMotor.set(-1); }
+        if (left * throttle < -1) { leftMotor.set(1); }
+        if (right * throttle > 1) { rightMotor.set(-1); }
+        if (right * throttle < -1) { rightMotor.set(1); }
         
         SmartDashboard.putNumber("Throttle", throttle);
         SmartDashboard.putNumber("Left Speed", leftMotor.get());
         SmartDashboard.putNumber("Right Speed", rightMotor.get());
     }
     
-    public void drive(double left, double right) {
+    public void drive() {
     	throttle = Robot.oi.throttle();
     	
-    	leftMotor.set(left * throttle * RobotMap.speedFactor);
-        rightMotor.set(right * throttle * RobotMap.speedFactor);
-        if (left * throttle > 1) { leftMotor.set(-1); }
-        if (left * throttle < -1) { leftMotor.set(1); }
-        if (right * throttle > 1) { rightMotor.set(-1); }
-        if (right * throttle < -1) { rightMotor.set(1); }
+        leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
+        rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor - rightOffset);
+        if (leftSpeed * throttle > 1) { leftMotor.set(-1); }
+        if (leftSpeed * throttle < -1) { leftMotor.set(1); }
+        if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
+        if (rightSpeed * throttle < -1) { rightMotor.set(1); }
         
         SmartDashboard.putNumber("Throttle", throttle);
         SmartDashboard.putNumber("Left Speed", leftMotor.get());

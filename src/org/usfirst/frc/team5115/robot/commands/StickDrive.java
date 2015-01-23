@@ -28,7 +28,7 @@ public class StickDrive extends Command {
     		Robot.chassis.rightSpeed = 0;
     	}
     	
-    	Robot.chassis.driveTele();
+    	Robot.chassis.drive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
