@@ -11,10 +11,6 @@ public class DriveComp extends Command {
 	
 	private int speed = 20;
 	private int checkFrame = 0;
-	private double distInitLeft = 0;
-	private double distInitRight = 0;
-	private double distFinLeft = 0;
-	private double distFinRight = 0;
 	private double speedLeft = 0;
 	private double speedRight = 0;
 	private double speedFactorLeft = 1;
@@ -28,17 +24,13 @@ public class DriveComp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	distInitLeft = Robot.chassis.leftDist();
-    	distInitRight = Robot.chassis.rightDist();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (checkFrame == speed) {
-    		distFinLeft = Robot.chassis.leftDist();
-    		distFinRight = Robot.chassis.rightDist();
-    		speedLeft = distFinLeft - distInitLeft;
-    		speedRight = distFinRight - distInitRight;
+    		speedLeft = Robot.chassis.leftSpeed();
+    		speedRight = Robot.chassis.rightSpeed();
     		
     		if (Robot.chassis.leftSpeed != 0 && Robot.chassis.rightSpeed != 0) {
 	    		speedFactorLeft = speedLeft / Robot.chassis.leftSpeed;
@@ -49,9 +41,10 @@ public class DriveComp extends Command {
 	    		if (speedFactorLeft < speedFactorRight)
 	    			Robot.chassis.rightOffset += (speedFactorRight - speedFactorLeft) / speedFactorRight;
     		}
-    		
-        	distInitLeft = Robot.chassis.leftDist();
-        	distInitRight = Robot.chassis.rightDist();
+    		if (Robot.chassis.leftSpeed == 0)
+    			Robot.chassis.leftOffset = Math.signum(speedLeft) * 0.01;
+    		if (Robot.chassis.rightSpeed == 0)
+    			Robot.chassis.rightOffset = Math.signum(speedRight) * 0.01;
     		
     		checkFrame = 0;
     	} else {

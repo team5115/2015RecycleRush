@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
+import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
-import org.usfirst.frc.team5115.robot.commands.ExampleCommand;
 import org.usfirst.frc.team5115.robot.commands.StickDrive;
 import org.usfirst.frc.team5115.robot.commands.WinchChecker;
 import org.usfirst.frc.team5115.robot.subsystems.Chassis;
-import org.usfirst.frc.team5115.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team5115.robot.subsystems.Pneumatic;
 import org.usfirst.frc.team5115.robot.subsystems.Winch;
 
@@ -29,14 +29,14 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final Winch winch = new Winch();
 	public static final Pneumatic pneumatic = new Pneumatic();
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
-    Command autonomousCommand;
     StickDrive sd;
     WinchChecker wc;
     DriveComp dc;
-
+    AutoStrat1 a1;
+    AutoStrat2 a2;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -44,10 +44,11 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
         sd = new StickDrive();
         wc = new WinchChecker();
         dc = new DriveComp();
+        a1 = new AutoStrat1();
+        a2 = new AutoStrat2();
         
         System.out.println("Started robot");
     }
@@ -58,9 +59,9 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
         wc.start();
         dc.start();
+        a1.start();	// replace a1/a2 with a2/a1 for strategy 2/1
     }
 
     /**
@@ -68,6 +69,11 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        
+        SmartDashboard.putBoolean("Winch switch", winch.hitLimit());
+        SmartDashboard.putNumber("Winch dir", winch.dir);
+        
+        Timer.delay(0.005);
     }
 
     public void teleopInit() {
@@ -75,10 +81,11 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+    	a1.cancel();
+    	a2.cancel();
         sd.start();	// start driving
         wc.start();
-        dc.start();
+        //dc.start();
         
         System.out.println("Entered Teleop mode");
     }

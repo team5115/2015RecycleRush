@@ -87,6 +87,13 @@ public class Chassis extends Subsystem {
     	return rightEncoder.getDistance();
     }
     
+    public double leftSpeed() {
+    	return leftEncoder.getRate();
+    }
+    
+    public double rightSpeed() {
+    	return rightEncoder.getRate();
+    }
     public boolean hitTote() {
     	return toteDetector.get();
     }
