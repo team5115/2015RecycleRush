@@ -1,13 +1,12 @@
 package org.usfirst.frc.team5115.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team5115.robot.commands.AutoLift;
 import org.usfirst.frc.team5115.robot.commands.Drop;
+import org.usfirst.frc.team5115.robot.commands.GimbalReset;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
 import org.usfirst.frc.team5115.robot.commands.MoveWinch;
@@ -28,11 +27,13 @@ public class OI {
 	Button upWinch;
 	Button downWinch;
 	Button raiseHeightOfTote;
+	Button gimbalReset;
 	
 	public OI() {
 		// Definitions: assign buttons to their numbers on the controller
 		joy = new Joystick(0);
 		gimbal = new Joystick(0);
+		gimbalReset = new JoystickButton(joy, 2);
 		grab = new JoystickButton(joy, 1);
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
@@ -45,7 +46,7 @@ public class OI {
 		downWinch.whenPressed(new MoveWinch(-1));
 		upWinch.whenReleased(new HoldWinch());
 		downWinch.whenReleased(new HoldWinch());
-		
+		gimbalReset.whenPressed(new GimbalReset());
 		
 		raiseHeightOfTote.whenReleased(new AutoLift(14));
 	}

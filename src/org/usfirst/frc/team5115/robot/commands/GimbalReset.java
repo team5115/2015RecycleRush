@@ -8,9 +8,9 @@ import org.usfirst.frc.team5115.robot.Robot;
 /**
  *
  */
-public class GimbalControl extends Command {
+public class GimbalReset extends Command {
 
-    public GimbalControl() {
+    public GimbalReset() {
        // Use requires() here to declare subsystem dependencies
        requires(Robot.gimbal);
     }
@@ -21,8 +21,8 @@ public class GimbalControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gimbal.xServo.setAngle(Robot.gimbal.xServo.getAngle() + Robot.oi.cameraX() * 0.15);
-    	Robot.gimbal.yServo.setAngle(Robot.gimbal.yServo.getAngle() + Robot.oi.cameraY() * 0.15);
+    	Robot.gimbal.xServo.setAngle(0);
+    	Robot.gimbal.yServo.setAngle(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

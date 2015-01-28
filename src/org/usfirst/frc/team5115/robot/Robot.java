@@ -14,6 +14,7 @@ import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.StickDrive;
 import org.usfirst.frc.team5115.robot.commands.WinchChecker;
 import org.usfirst.frc.team5115.robot.subsystems.Chassis;
+import org.usfirst.frc.team5115.robot.subsystems.Gimbal;
 import org.usfirst.frc.team5115.robot.subsystems.Pneumatic;
 import org.usfirst.frc.team5115.robot.subsystems.Winch;
 
@@ -26,9 +27,10 @@ import org.usfirst.frc.team5115.robot.subsystems.Winch;
  */
 public class Robot extends IterativeRobot {
 
-	public static final Chassis chassis = new Chassis();
-	public static final Winch winch = new Winch();
-	public static final Pneumatic pneumatic = new Pneumatic();
+	public static Chassis chassis = new Chassis();
+	public static Winch winch = new Winch();
+	public static Pneumatic pneumatic = new Pneumatic();
+	public static Gimbal gimbal = new Gimbal();
 	public static OI oi;
 
     StickDrive sd;
