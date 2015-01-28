@@ -106,6 +106,8 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("Winch switch", winch.hitLimit());
         SmartDashboard.putNumber("Winch dir", winch.dir);
+        SmartDashboard.putNumber("Gimbal X", oi.cameraX());
+        SmartDashboard.putNumber("Gimbal Y", oi.cameraY());
         
         Timer.delay(0.005);
     }

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5115.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,7 @@ import java.lang.Math;
 public class OI {
 	// Joystick
 	Joystick joy;
+	Joystick gimbal;
 	
 	// Buttons
 	Button grab;
@@ -30,6 +32,7 @@ public class OI {
 	public OI() {
 		// Definitions: assign buttons to their numbers on the controller
 		joy = new Joystick(0);
+		gimbal = new Joystick(0);
 		grab = new JoystickButton(joy, 1);
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
@@ -66,6 +69,12 @@ public class OI {
 	}
 	public double throttle() {
 		return -0.5 * (joy.getThrottle() - 1);
+	}
+	public double cameraX() {
+		return gimbal.getRawAxis(4);
+	}
+	public double cameraY() {
+		return gimbal.getRawAxis(5);
 	}
 	
     //// CREATING BUTTONS
