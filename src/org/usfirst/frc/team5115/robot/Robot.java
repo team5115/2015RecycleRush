@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
+import org.usfirst.frc.team5115.robot.commands.GimbalControl;
+import org.usfirst.frc.team5115.robot.commands.GimbalReset;
 import org.usfirst.frc.team5115.robot.commands.StickDrive;
 import org.usfirst.frc.team5115.robot.commands.WinchChecker;
 import org.usfirst.frc.team5115.robot.subsystems.Chassis;
@@ -38,6 +40,8 @@ public class Robot extends IterativeRobot {
     DriveComp dc;
     AutoStrat1 a1;
     AutoStrat2 a2;
+    GimbalReset gr;
+    GimbalControl gc;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -51,6 +55,8 @@ public class Robot extends IterativeRobot {
         dc = new DriveComp();
         a1 = new AutoStrat1();
         a2 = new AutoStrat2();
+        gr = new GimbalReset();
+        gc = new GimbalControl();
         
         System.out.println("Started robot");
     }
@@ -64,6 +70,7 @@ public class Robot extends IterativeRobot {
         wc.start();
         dc.start();
         a1.start();	// replace a1/a2 with a2/a1 for strategy 2/1
+        gr.start();
     }
 
     /**
@@ -87,7 +94,8 @@ public class Robot extends IterativeRobot {
     	a2.cancel();
         sd.start();	// start driving
         wc.start();
-        //dc.start();
+        dc.start();
+        gc.start();
         
         System.out.println("Entered Teleop mode");
     }

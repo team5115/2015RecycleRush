@@ -32,7 +32,7 @@ public class OI {
 	public OI() {
 		// Definitions: assign buttons to their numbers on the controller
 		joy = new Joystick(0);
-		gimbal = new Joystick(0);
+		gimbal = new Joystick(1);
 		gimbalReset = new JoystickButton(joy, 2);
 		grab = new JoystickButton(joy, 1);
 		upWinch = new JoystickButton(joy, 5);
@@ -72,10 +72,12 @@ public class OI {
 		return -0.5 * (joy.getThrottle() - 1);
 	}
 	public double cameraX() {
-		return gimbal.getRawAxis(4);
+		if (joy.getPOV() == -1) { return 0; }
+		return Math.sin(Math.toRadians(joy.getPOV()));
 	}
 	public double cameraY() {
-		return gimbal.getRawAxis(5);
+		if (joy.getPOV() == -1) { return 0; }
+		return Math.cos(Math.toRadians(joy.getPOV()));
 	}
 	
     //// CREATING BUTTONS
