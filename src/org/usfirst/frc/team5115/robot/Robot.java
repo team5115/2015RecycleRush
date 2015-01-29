@@ -35,13 +35,13 @@ public class Robot extends IterativeRobot {
 	public static Gimbal gimbal = new Gimbal();
 	public static OI oi;
 
-    StickDrive sd;
-    WinchChecker wc;
-    DriveComp dc;
-    AutoStrat1 a1;
-    AutoStrat2 a2;
-    GimbalReset gr;
-    GimbalControl gc;
+	public static StickDrive sd;
+	public static WinchChecker wc;
+	public static DriveComp dc;
+	public static AutoStrat1 a1;
+	public static AutoStrat2 a2;
+    public static GimbalReset gr;
+    public static GimbalControl gc;
     
     /**
      * This function is run when the robot is first started up and should be
