@@ -18,7 +18,7 @@ public class GimbalReset extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.gimbal.xServo.setAngle(90);
-    	Robot.gimbal.yServo.setAngle(90);
+    	Robot.gimbal.yServo.setAngle(135);
     }
 
     // Called repeatedly when this Command is scheduled to run

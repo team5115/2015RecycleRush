@@ -34,7 +34,8 @@ public class AutoDrive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+        //return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+    	return Robot.chassis.leftDist() >= dist || Robot.chassis.hitTote();
     }
 
     // Called once after isFinished returns true

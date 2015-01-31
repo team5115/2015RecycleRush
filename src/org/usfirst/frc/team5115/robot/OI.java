@@ -77,7 +77,7 @@ public class OI {
 	}
 	public double cameraY() {
 		if (joy.getPOV() == -1) { return 0; }
-		return Math.cos(Math.toRadians(joy.getPOV()));
+		return -1 * Math.cos(Math.toRadians(joy.getPOV()));
 	}
 	
     //// CREATING BUTTONS

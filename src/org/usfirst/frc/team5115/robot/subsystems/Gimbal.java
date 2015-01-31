@@ -17,6 +17,8 @@ public class Gimbal extends Subsystem {
     public Gimbal() {
     	xServo = new Servo (RobotMap.gimbalX);
     	yServo = new Servo (RobotMap.gimbalY);
+    	xServo.setAngle(90);
+    	yServo.setAngle(135);
     }
     
 

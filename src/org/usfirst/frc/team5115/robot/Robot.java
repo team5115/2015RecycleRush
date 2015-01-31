@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
+import org.usfirst.frc.team5115.robot.commands.AutoStrategyTest;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.GimbalControl;
 import org.usfirst.frc.team5115.robot.commands.GimbalReset;
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
 	public static DriveComp dc;
 	public static AutoStrat1 a1;
 	public static AutoStrat2 a2;
+	public static AutoStrategyTest at;
     public static GimbalReset gr;
     public static GimbalControl gc;
     
@@ -55,6 +57,7 @@ public class Robot extends IterativeRobot {
         dc = new DriveComp();
         a1 = new AutoStrat1();
         a2 = new AutoStrat2();
+        at = new AutoStrategyTest();
         gr = new GimbalReset();
         gc = new GimbalControl();
         
@@ -69,7 +72,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
         wc.start();
         dc.start();
-        a1.start();	// replace a1/a2 with a2/a1 for strategy 2/1
+        at.start();	// replace a1/a2 with a2/a1 for strategy 2/1
         gr.start();
     }
 
@@ -92,9 +95,10 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
     	a1.cancel();
     	a2.cancel();
+    	at.cancel();
         sd.start();	// start driving
         wc.start();
-        dc.start();
+        //dc.start();
         gc.start();
         
         System.out.println("Entered Teleop mode");
