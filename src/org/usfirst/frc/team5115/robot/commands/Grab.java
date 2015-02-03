@@ -17,7 +17,7 @@ public class Grab extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.pneumatic.in();
+    	Robot.pneumatic.toggle();
     }
 
     // Called repeatedly when this Command is scheduled to run

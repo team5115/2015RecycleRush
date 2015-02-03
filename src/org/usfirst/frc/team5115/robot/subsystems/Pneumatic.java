@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pneumatic extends Subsystem {
 	
 	DoubleSolenoid sol1;
+	private boolean grabbing = false;
 	
 	public Pneumatic() {
 		sol1 = new DoubleSolenoid(RobotMap.solForward, RobotMap.solReverse);
@@ -30,6 +31,11 @@ public class Pneumatic extends Subsystem {
 	
 	public void close() {
 		sol1.set(DoubleSolenoid.Value.kOff);
+	}
+	public void toggle() {
+		if (grabbing) out();
+		else in();
+		grabbing = !grabbing;
 	}
 
     public void initDefaultCommand() {

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5115.robot.commands.AutoLift;
-import org.usfirst.frc.team5115.robot.commands.Drop;
 import org.usfirst.frc.team5115.robot.commands.GimbalReset;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
@@ -41,7 +40,6 @@ public class OI {
 		
 		// Link the buttons to commands
 		grab.whenPressed(new Grab());
-		grab.whenReleased(new Drop());
 		upWinch.whenPressed(new MoveWinch(1));
 		downWinch.whenPressed(new MoveWinch(-1));
 		upWinch.whenReleased(new HoldWinch());

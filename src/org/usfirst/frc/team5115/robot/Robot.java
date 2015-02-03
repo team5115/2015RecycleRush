@@ -127,7 +127,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("DB/LED 0", Robot.chassis.hitTote());
+        SmartDashboard.putBoolean("DB/LED 0", chassis.hitTote());
+        SmartDashboard.putBoolean("DB/LED 1", winch.hitLimit());
         
         Timer.delay(0.005);
     }

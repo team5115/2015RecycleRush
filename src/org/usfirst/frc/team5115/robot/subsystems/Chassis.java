@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  *
  */
@@ -69,7 +70,7 @@ public class Chassis extends Subsystem {
         if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
         if (rightSpeed * throttle < -1) { rightMotor.set(1); }
         
-        SmartDashboard.putString("DB/String 0", "Throttle: " + throttle);
+        SmartDashboard.putString("DB/String 0", "Throttle: " + String.format("%2f", throttle));
         SmartDashboard.putString("DB/String 1", "Left Speed: " + leftMotor.get());
         SmartDashboard.putString("DB/String 2","Right Speed: " + rightMotor.get());
     }

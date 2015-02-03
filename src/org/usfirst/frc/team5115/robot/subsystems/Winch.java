@@ -39,12 +39,13 @@ public class Winch extends Subsystem {
 	// starts moving if there is room and updates the direction of travel
 	public void move(int d) {
 		dir = d;
-		if (!hitLimit()) { winchMotor.set(RobotMap.winchSpeed * dir); }
+		if (!hitLimit() && dir == 1) { winchMotor.set(RobotMap.winchSpeed * dir); }
+		if (!hitLimit() && dir == -1) { winchMotor.set(RobotMap.winchSpeed * dir * 0.5); }
 	}
 	
 	// reverses until the limit switch is no longer pressed and stops the motor
 	public void hold() {
-		while (hitLimit()) { winchMotor.set(-0.1 * RobotMap.winchSpeed * dir); }
+		while (hitLimit()) { winchMotor.set(-0.5 * RobotMap.winchSpeed * dir); }
 		winchMotor.set(0);
 	}
 	
