@@ -45,6 +45,10 @@ public class Robot extends IterativeRobot {
     public static GimbalReset gr;
     public static GimbalControl gc;
     
+    public static int mode = 0; // 0 for off; 1 for tele; 2 for auto
+    
+   // private int strategy = 3;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -70,10 +74,13 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	mode = 2;
         wc.start();
-        dc.start();
-        at.start();	// replace a1/a2 with a2/a1 for strategy 2/1
+        //dc.start();
         gr.start();
+        Robot.chassis.throttle = 1;
+        at.start();
+        SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
     /**
@@ -82,8 +89,7 @@ public class Robot extends IterativeRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("Winch switch", winch.hitLimit());
-        SmartDashboard.putNumber("Winch dir", winch.dir);
+        SmartDashboard.putBoolean("DB/LED 0", Robot.chassis.hitTote());
         
         Timer.delay(0.005);
     }
@@ -93,6 +99,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	mode = 1;
     	a1.cancel();
     	a2.cancel();
     	at.cancel();
@@ -102,6 +109,7 @@ public class Robot extends IterativeRobot {
         gc.start();
         
         System.out.println("Entered Teleop mode");
+        SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
     /**
@@ -109,7 +117,8 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	mode = 0;
+        SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
     /**
@@ -118,10 +127,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("Winch switch", winch.hitLimit());
-        SmartDashboard.putNumber("Winch dir", winch.dir);
-        SmartDashboard.putNumber("Gimbal X", oi.cameraX());
-        SmartDashboard.putNumber("Gimbal Y", oi.cameraY());
+        SmartDashboard.putBoolean("DB/LED 0", Robot.chassis.hitTote());
         
         Timer.delay(0.005);
     }

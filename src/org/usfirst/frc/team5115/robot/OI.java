@@ -53,8 +53,8 @@ public class OI {
 	
 	// Return speeds for each side (not including throttle) for the StickDrive command
 	public double leftSpeed() {
-		SmartDashboard.putNumber("Joystick Y", joy.getY());
-		SmartDashboard.putNumber("Joystick X", joy.getX());
+		SmartDashboard.putString("DB/String 4", "Joystick Y: " + joy.getY());
+		SmartDashboard.putString("DB/String 3", "Joystick X: " + joy.getX());
 		if (Math.abs(joy.getY()) > 0.11 || Math.abs(joy.getX()) > 0.11) {
 			return (-1 * joy.getY() - joy.getX());
 		} else {

@@ -14,12 +14,12 @@ public class AutoStrat1 extends CommandGroup {
     	requires(Robot.winch);
     	requires(Robot.pneumatic);
     	
-    	addSequential(new AutoDrive(10));
+    	addSequential(new AutoDriveToTote());
     	addSequential(new AutoLift(4));
     	addSequential(new AutoTurn(-90));
     	addSequential(new AutoDrive(132));
     	addSequential(new AutoTurn(90));	//if on left, 90; if on right, -90
-    	addSequential(new AutoEnd(10000));
+    	addSequential(new AutoDriveToTote());
     	addSequential(new AutoDrop(-3));
     	addSequential(new AutoDrive(-24));
     	addSequential(new AutoTurn(-90));    //if on left, -90; if on right, 90

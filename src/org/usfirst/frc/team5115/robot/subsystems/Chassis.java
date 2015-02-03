@@ -19,7 +19,7 @@ public class Chassis extends Subsystem {
 	public double rightSpeed = 0;
 	public double leftOffset = 0;
 	public double rightOffset = 0;
-	private double throttle;
+	public double throttle;
     private Victor rightMotor;
     private Victor leftMotor;
     private Encoder leftEncoder;
@@ -45,7 +45,7 @@ public class Chassis extends Subsystem {
     }
     
     public void drive(double left, double right) {
-    	throttle = Robot.oi.throttle();
+    	if (Robot.mode == 1) throttle = Robot.oi.throttle();
     	
     	leftMotor.set(left * throttle * RobotMap.speedFactor - leftOffset);
         rightMotor.set(right * throttle * RobotMap.speedFactor - rightOffset);
@@ -54,13 +54,13 @@ public class Chassis extends Subsystem {
         if (right * throttle > 1) { rightMotor.set(-1); }
         if (right * throttle < -1) { rightMotor.set(1); }
         
-        SmartDashboard.putNumber("Throttle", throttle);
-        SmartDashboard.putNumber("Left Speed", leftMotor.get());
-        SmartDashboard.putNumber("Right Speed", rightMotor.get());
+        SmartDashboard.putString("DB/String 0", "Throttle: " + throttle);
+        SmartDashboard.putString("DB/String 1", "Left Speed: " + leftMotor.get());
+        SmartDashboard.putString("DB/String 2","Right Speed: " + rightMotor.get());
     }
     
     public void drive() {
-    	throttle = Robot.oi.throttle();
+    	if (Robot.mode == 1) throttle = Robot.oi.throttle();
     	
         leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
         rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor - rightOffset);
@@ -69,9 +69,9 @@ public class Chassis extends Subsystem {
         if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
         if (rightSpeed * throttle < -1) { rightMotor.set(1); }
         
-        SmartDashboard.putNumber("Throttle", throttle);
-        SmartDashboard.putNumber("Left Speed", leftMotor.get());
-        SmartDashboard.putNumber("Right Speed", rightMotor.get());
+        SmartDashboard.putString("DB/String 0", "Throttle: " + throttle);
+        SmartDashboard.putString("DB/String 1", "Left Speed: " + leftMotor.get());
+        SmartDashboard.putString("DB/String 2","Right Speed: " + rightMotor.get());
     }
     
     public void startEncoders() {
@@ -95,7 +95,7 @@ public class Chassis extends Subsystem {
     	return rightEncoder.getRate();
     }
     public boolean hitTote() {
-    	return toteDetector.get();
+    	return !toteDetector.get();
     }
     
     public void initDefaultCommand() {

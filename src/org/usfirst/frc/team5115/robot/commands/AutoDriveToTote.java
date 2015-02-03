@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5115.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team5115.robot.Robot;
@@ -9,21 +10,18 @@ import org.usfirst.frc.team5115.robot.RobotMap;
 /**
  *
  */
-public class AutoEnd extends Command {
-	
-	private double dist;
+public class AutoDriveToTote extends Command {
 
-    public AutoEnd(double d) {
+    public AutoDriveToTote() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
-        
-        dist = d;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
     	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	System.out.println("started driving");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,11 +31,14 @@ public class AutoEnd extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+        //return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+    	return Robot.chassis.hitTote();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Timer.delay(.01);
+    	while (Robot.chassis.hitTote()) { Robot.chassis.drive(-0.5 * RobotMap.autoSpeed, -0.5 * RobotMap.autoSpeed); }
     	Robot.chassis.drive(0, 0);
     }
 
