@@ -11,29 +11,32 @@ import org.usfirst.frc.team5115.robot.RobotMap;
  */
 public class AutoTurn extends Command {
 
-	private int degrees = 0;
+	private double degrees = 0;
 
     public AutoTurn(int d) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
         
         degrees = d;
+        if (degrees > 0) degrees -= 10;
+        if (degrees < 0) degrees += 10;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	if (degrees > 0) {Robot.chassis.drive(RobotMap.autoSpeed, -RobotMap.autoSpeed); }
-    	if (degrees < 0) {Robot.chassis.drive(-RobotMap.autoSpeed, RobotMap.autoSpeed); }
+    	if (degrees > 0) { Robot.chassis.drive(RobotMap.autoSpeed, -RobotMap.autoSpeed); }
+    	if (degrees < 0) { Robot.chassis.drive(-RobotMap.autoSpeed, RobotMap.autoSpeed); }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println(Robot.chassis.rightDist() / RobotMap.circumference + " " + degrees / 360);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.chassis.rightDist() / RobotMap.circumference >= degrees / 360;
+        return Math.abs(Robot.chassis.rightDist() / RobotMap.circumference) >= Math.abs(degrees / 360);
     }
 
     // Called once after isFinished returns true

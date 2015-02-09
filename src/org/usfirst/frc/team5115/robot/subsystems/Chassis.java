@@ -19,6 +19,7 @@ public class Chassis extends Subsystem {
 	public double leftSpeed = 0;
 	public double rightSpeed = 0;
 	public double leftOffset = 0;
+	public double rightOffset = 0;
 	public double throttle;
     private Victor rightMotor;
     private Victor leftMotor;
@@ -54,7 +55,11 @@ public class Chassis extends Subsystem {
     public void drive() {
     	if (Robot.mode == 1) throttle = Robot.oi.throttle();
     	
-        leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
+    	if (leftSpeed > 0) {
+            leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
+    	} else {
+    		leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor + leftOffset);
+    	}
         rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor);
         if (leftSpeed * throttle > 1) { leftMotor.set(-1); }
         if (leftSpeed * throttle < -1) { leftMotor.set(1); }
