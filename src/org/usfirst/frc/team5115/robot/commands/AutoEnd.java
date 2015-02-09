@@ -9,35 +9,29 @@ import org.usfirst.frc.team5115.robot.RobotMap;
 /**
  *
  */
-public class AutoDrive extends Command {
-	
-	private double dist;
+public class AutoEnd extends Command {
 
-    public AutoDrive(double d) {
+    public AutoEnd() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.chassis);
-        
-        dist = d;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
     	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	System.out.println("started driving");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println((Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2);
-    	if ((Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist - 6) {
-    		Robot.chassis.drive(RobotMap.autoSpeed * 0.5, RobotMap.autoSpeed * 0.5);
-    		System.out.println("within 6 in");
-    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist;
+        //return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
+    	return Robot.chassis.hitTote();
     }
 
     // Called once after isFinished returns true

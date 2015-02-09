@@ -19,7 +19,7 @@ public class AutoStrat1 extends CommandGroup {
     	addSequential(new AutoTurn(-90));
     	addSequential(new AutoDrive(132));
     	addSequential(new AutoTurn(90));	//if on left, 90; if on right, -90
-    	addSequential(new AutoDriveToTote());
+    	addSequential(new AutoEnd());
     	addSequential(new AutoDrop(-3));
     	addSequential(new AutoDrive(-24));
     	addSequential(new AutoTurn(-90));    //if on left, -90; if on right, 90

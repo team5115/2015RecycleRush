@@ -4,11 +4,9 @@ package org.usfirst.frc.team5115.robot.subsystems;
 import org.usfirst.frc.team5115.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -39,8 +37,7 @@ public class Winch extends Subsystem {
 	// starts moving if there is room and updates the direction of travel
 	public void move(int d) {
 		dir = d;
-		if (!hitLimit() && dir == 1) { winchMotor.set(RobotMap.winchSpeed * dir); }
-		if (!hitLimit() && dir == -1) { winchMotor.set(RobotMap.winchSpeed * dir * 0.5); }
+		winchMotor.set(RobotMap.winchSpeed * dir);
 	}
 	
 	// reverses until the limit switch is no longer pressed and stops the motor

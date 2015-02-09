@@ -9,17 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveComp extends Command {
 	
-	private int speed = 20;
-	private int checkFrame = 0;
 	private double speedLeft = 0;
 	private double speedRight = 0;
-	private double speedFactorLeft = 1;
-	private double speedFactorRight = 1;
+	private double leftIn;
+	private double rightIn = 1;
 
     public DriveComp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
@@ -28,28 +25,20 @@ public class DriveComp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (checkFrame == speed) {
-    		speedLeft = Robot.chassis.leftSpeed();
-    		speedRight = Robot.chassis.rightSpeed();
-    		
-    		if (Robot.chassis.leftSpeed != 0 && Robot.chassis.rightSpeed != 0) {
-	    		speedFactorLeft = speedLeft / Robot.chassis.leftSpeed;
-	    		speedFactorRight = speedRight / Robot.chassis.rightSpeed;
-	    		
-	    		if (speedFactorLeft > speedFactorRight)
-	    			Robot.chassis.leftOffset += (speedFactorLeft - speedFactorRight) / speedFactorLeft;
-	    		if (speedFactorLeft < speedFactorRight)
-	    			Robot.chassis.rightOffset += (speedFactorRight - speedFactorLeft) / speedFactorRight;
-    		}
-    		if (Robot.chassis.leftSpeed == 0)
-    			Robot.chassis.leftOffset = Math.signum(speedLeft) * 0.01;
-    		if (Robot.chassis.rightSpeed == 0)
-    			Robot.chassis.rightOffset = Math.signum(speedRight) * 0.01;
-    		
-    		checkFrame = 0;
-    	} else {
-    		checkFrame ++;
-    	}
+		speedLeft = Robot.chassis.leftRate();
+		speedRight = Robot.chassis.rightRate();
+		leftIn = Robot.chassis.leftSpeed;
+		rightIn = Robot.chassis.rightSpeed;
+		
+		if (speedLeft != 0 && leftIn != 0) {
+			if (speedRight / speedLeft > rightIn / leftIn)
+				Robot.chassis.leftOffset += 0.01;
+			if (speedRight / speedLeft < rightIn / leftIn)
+				Robot.chassis.leftOffset -= 0.01;
+			Robot.chassis.drive();
+		}
+		if (leftIn == 0 && rightIn == 0)
+			Robot.chassis.leftOffset = 0;
     }
 
     // Make this return true when this Command no longer needs to run execute()

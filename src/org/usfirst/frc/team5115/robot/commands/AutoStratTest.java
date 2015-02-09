@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoStrategyTest extends CommandGroup {
+public class AutoStratTest extends CommandGroup {
     
-    public  AutoStrategyTest() {
+    public  AutoStratTest() {
     	
     	System.out.println("Started test strategy");
-    	addSequential(new AutoDriveToTote());
+    	addSequential(new AutoDrive(36));
     	//addSequential(new Grab());
     	
         // Add Commands here:

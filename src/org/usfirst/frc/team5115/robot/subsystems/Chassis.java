@@ -19,7 +19,6 @@ public class Chassis extends Subsystem {
 	public double leftSpeed = 0;
 	public double rightSpeed = 0;
 	public double leftOffset = 0;
-	public double rightOffset = 0;
 	public double throttle;
     private Victor rightMotor;
     private Victor leftMotor;
@@ -36,43 +35,37 @@ public class Chassis extends Subsystem {
         
         leftEncoder = new Encoder(RobotMap.leftEncoder1, RobotMap.leftEncoder2, true, EncodingType.k4X);
         rightEncoder = new Encoder(RobotMap.rightEncoder1, RobotMap.rightEncoder2, true, EncodingType.k4X);
-        leftEncoder.setDistancePerPulse(12.566 / 4);
-        rightEncoder.setDistancePerPulse(12.566 / 4);
+        leftEncoder.setDistancePerPulse(12.566 / 250);	// 250 CPR, 4 pulses per cycle, 12.566 inches circumference on wheel
+        rightEncoder.setDistancePerPulse(12.566 / 250);
         
         toteDetector = new DigitalInput(RobotMap.toteDetector);
         
         leftEncoder.reset();
         rightEncoder.reset();
     }
-    
+
+ 
     public void drive(double left, double right) {
-    	if (Robot.mode == 1) throttle = Robot.oi.throttle();
-    	
-    	leftMotor.set(left * throttle * RobotMap.speedFactor - leftOffset);
-        rightMotor.set(right * throttle * RobotMap.speedFactor - rightOffset);
-        if (left * throttle > 1) { leftMotor.set(-1); }
-        if (left * throttle < -1) { leftMotor.set(1); }
-        if (right * throttle > 1) { rightMotor.set(-1); }
-        if (right * throttle < -1) { rightMotor.set(1); }
-        
-        SmartDashboard.putString("DB/String 0", "Throttle: " + throttle);
-        SmartDashboard.putString("DB/String 1", "Left Speed: " + leftMotor.get());
-        SmartDashboard.putString("DB/String 2","Right Speed: " + rightMotor.get());
+    	leftSpeed = left;
+    	rightSpeed = right;
+    	drive();
     }
     
     public void drive() {
     	if (Robot.mode == 1) throttle = Robot.oi.throttle();
     	
         leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
-        rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor - rightOffset);
+        rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor);
         if (leftSpeed * throttle > 1) { leftMotor.set(-1); }
         if (leftSpeed * throttle < -1) { leftMotor.set(1); }
         if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
         if (rightSpeed * throttle < -1) { rightMotor.set(1); }
         
         SmartDashboard.putString("DB/String 0", "Throttle: " + String.format("%2f", throttle));
-        SmartDashboard.putString("DB/String 1", "Left Speed: " + leftMotor.get());
-        SmartDashboard.putString("DB/String 2","Right Speed: " + rightMotor.get());
+        SmartDashboard.putString("DB/String 1", "Left: " + String.format("%2f", leftMotor.get()));
+        SmartDashboard.putString("DB/String 2","Right: " + String.format("%2f", rightMotor.get()));
+        SmartDashboard.putString("DB/String 6", "Left: " + String.format("%2f", leftRate()));
+        SmartDashboard.putString("DB/String 7","Right: " + String.format("%2f", rightRate()));
     }
     
     public void startEncoders() {
@@ -88,11 +81,11 @@ public class Chassis extends Subsystem {
     	return rightEncoder.getDistance();
     }
     
-    public double leftSpeed() {
+    public double leftRate() {
     	return leftEncoder.getRate();
     }
     
-    public double rightSpeed() {
+    public double rightRate() {
     	return rightEncoder.getRate();
     }
     public boolean hitTote() {
@@ -104,3 +97,4 @@ public class Chassis extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }  
 }
+    

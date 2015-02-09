@@ -3,14 +3,13 @@ package org.usfirst.frc.team5115.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
-import org.usfirst.frc.team5115.robot.commands.AutoStrategyTest;
+import org.usfirst.frc.team5115.robot.commands.AutoStratTest;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.GimbalControl;
 import org.usfirst.frc.team5115.robot.commands.GimbalReset;
@@ -41,7 +40,7 @@ public class Robot extends IterativeRobot {
 	public static DriveComp dc;
 	public static AutoStrat1 a1;
 	public static AutoStrat2 a2;
-	public static AutoStrategyTest at;
+	public static AutoStratTest at;
     public static GimbalReset gr;
     public static GimbalControl gc;
     
@@ -61,7 +60,7 @@ public class Robot extends IterativeRobot {
         dc = new DriveComp();
         a1 = new AutoStrat1();
         a2 = new AutoStrat2();
-        at = new AutoStrategyTest();
+        at = new AutoStratTest();
         gr = new GimbalReset();
         gc = new GimbalControl();
         
@@ -76,7 +75,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
     	mode = 2;
         wc.start();
-        //dc.start();
+        dc.start();
         gr.start();
         Robot.chassis.throttle = 1;
         at.start();
@@ -103,9 +102,10 @@ public class Robot extends IterativeRobot {
     	a1.cancel();
     	a2.cancel();
     	at.cancel();
+    	dc.cancel();
         sd.start();	// start driving
         wc.start();
-        //dc.start();
+        //dc.start();	put back after fixing it for tele
         gc.start();
         
         System.out.println("Entered Teleop mode");
@@ -130,7 +130,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("DB/LED 0", chassis.hitTote());
         SmartDashboard.putBoolean("DB/LED 1", winch.hitLimit());
         
-        Timer.delay(0.005);
+        Timer.delay(0.005);     
     }
     
     /**
