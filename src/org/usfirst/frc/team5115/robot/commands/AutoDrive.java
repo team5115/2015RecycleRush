@@ -28,15 +28,12 @@ public class AutoDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if ((Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist - 6) {
-    		Robot.chassis.drive(RobotMap.autoSpeed * 0.2, RobotMap.autoSpeed * 0.2);
-    		System.out.println("within 6 in");
-    	}
+    	System.out.println("driving");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist;
+        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist - 5;
     }
 
     // Called once after isFinished returns true

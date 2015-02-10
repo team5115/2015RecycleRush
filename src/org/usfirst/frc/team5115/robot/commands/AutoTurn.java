@@ -18,8 +18,8 @@ public class AutoTurn extends Command {
         requires(Robot.chassis);
         
         degrees = d;
-        if (degrees > 0) degrees -= 10;
-        if (degrees < 0) degrees += 10;
+        if (degrees > 0) degrees -= 13;
+        if (degrees < 0) degrees += 13;
     }
 
     // Called just before this Command runs the first time
@@ -31,7 +31,7 @@ public class AutoTurn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println(Robot.chassis.rightDist() / RobotMap.circumference + " " + degrees / 360);
+    	System.out.println("turning");
     }
 
     // Make this return true when this Command no longer needs to run execute()
