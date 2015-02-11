@@ -20,7 +20,7 @@ public class AutoDriveToTote extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	Robot.chassis.drive(RobotMap.autoSpeedShort, RobotMap.autoSpeedShort);
     	System.out.println("started driving");
     }
 
@@ -38,7 +38,7 @@ public class AutoDriveToTote extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Timer.delay(.01);
-    	while (Robot.chassis.hitTote()) { Robot.chassis.drive(-0.5 * RobotMap.autoSpeed, -0.5 * RobotMap.autoSpeed); }
+    	while (Robot.chassis.hitTote()) { Robot.chassis.drive(-0.5 * RobotMap.autoSpeedShort, -0.5 * RobotMap.autoSpeedShort); }
     	Robot.chassis.drive(0, 0);
     }
 

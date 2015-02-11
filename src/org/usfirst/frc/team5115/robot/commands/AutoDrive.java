@@ -23,7 +23,12 @@ public class AutoDrive extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	if (Math.abs(dist) <= 60) {
+    		Robot.chassis.drive(RobotMap.autoSpeedShort * Math.signum(dist), RobotMap.autoSpeedShort * Math.signum(dist));
+    	} else {
+    	    Robot.chassis.drive(RobotMap.autoSpeedFar * Math.signum(dist), RobotMap.autoSpeedFar * Math.signum(dist));    	    	
+    	}
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +38,7 @@ public class AutoDrive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist - 5;
+        return Math.abs(Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= Math.abs(dist);
     }
 
     // Called once after isFinished returns true

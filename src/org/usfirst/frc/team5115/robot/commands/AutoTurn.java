@@ -18,15 +18,15 @@ public class AutoTurn extends Command {
         requires(Robot.chassis);
         
         degrees = d;
-        if (degrees > 0) degrees -= 13;
-        if (degrees < 0) degrees += 13;
+        if (degrees > 0) degrees -= 20;
+        if (degrees < 0) degrees += 20;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	if (degrees > 0) { Robot.chassis.drive(RobotMap.autoSpeed, -RobotMap.autoSpeed); }
-    	if (degrees < 0) { Robot.chassis.drive(-RobotMap.autoSpeed, RobotMap.autoSpeed); }
+    	if (degrees > 0) { Robot.chassis.drive(RobotMap.autoSpeedShort, -RobotMap.autoSpeedShort); }
+    	if (degrees < 0) { Robot.chassis.drive(-RobotMap.autoSpeedShort, RobotMap.autoSpeedShort); }
     }
 
     // Called repeatedly when this Command is scheduled to run

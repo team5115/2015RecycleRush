@@ -41,10 +41,8 @@ public class DriveComp extends Command {
 			}
 		}
 		
-		if (leftIn == 0 && rightIn == 0) {
-			Robot.chassis.leftOffset = 0;
-			Robot.chassis.rightOffset = 0;
-		}
+		if (leftIn == 0) Robot.chassis.leftOffset = 0;
+		if (rightIn == 0) Robot.chassis.rightOffset = 0;
 		
 		Robot.chassis.drive();
     }

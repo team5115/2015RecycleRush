@@ -19,7 +19,7 @@ public class AutoEnd extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.startEncoders();
-    	Robot.chassis.drive(RobotMap.autoSpeed, RobotMap.autoSpeed);
+    	Robot.chassis.drive(RobotMap.autoSpeedFar, RobotMap.autoSpeedFar);
     	System.out.println("started driving");
     }
 

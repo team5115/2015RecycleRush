@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
         dc.start();
         gr.start();
         Robot.chassis.throttle = 1;
-        at.start();
+        a2.start();
         SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
     	dc.cancel();
         sd.start();	// start driving
         wc.start();
-        //dc.start();	put back after fixing it for tele
+        //dc.start();
         gc.start();
         
         System.out.println("Entered Teleop mode");

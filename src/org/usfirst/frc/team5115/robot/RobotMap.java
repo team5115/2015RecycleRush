@@ -14,7 +14,8 @@ public class RobotMap {
 	//Chassis
 	public static int leftMotor = 0;
 	public static int rightMotor = 1;
-	public static double autoSpeed = 0.3;
+	public static double autoSpeedShort = 0.3;
+	public static double autoSpeedFar = 0.5;
 	public static double speedFactor = .75;
 	public static int leftEncoder1 = 0;
 	public static int leftEncoder2 = 1;

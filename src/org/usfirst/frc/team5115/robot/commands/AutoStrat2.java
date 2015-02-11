@@ -9,21 +9,21 @@ public class AutoStrat2 extends CommandGroup {
     
     public  AutoStrat2() {
     	
-    	addSequential(new AutoDriveToTote());
-    	addSequential(new AutoLift(14));
+    	//addSequential(new AutoDriveToTote());
+    	//addSequential(new AutoLift(14));
     	addSequential(new AutoDrive(22));
-    	addSequential(new AutoDrop(0));
+    	//addSequential(new AutoDrop(0));
     	addSequential(new AutoDrive(-3));
-    	addSequential(new AutoDrop(-14));
-    	addSequential(new AutoDriveToTote());
-    	addSequential(new AutoLift(4));
+    	//addSequential(new AutoDrop(-14));
+    	//addSequential(new AutoDriveToTote());
+    	//addSequential(new AutoLift(4));
     	addSequential(new AutoTurn(90));
-    	addSequential(new AutoDrive(132));
-    	addSequential(new AutoTurn(90));	// if on left side, 90; if on right side, -90
-    	addSequential(new AutoEnd());
-    	addSequential(new AutoDrop(-3));
-    	addSequential(new AutoDrive(-24));
-    	addSequential(new AutoTurn(-90));    //if on left, -90; if on right, 90
+    	addSequential(new AutoDrive(120));
+    	addSequential(new AutoTurn(-90));	// if on left side, -90; if on right side, 90
+    	addSequential(new AutoDrive(72));
+    	//addSequential(new AutoDrop(-3));
+    	addSequential(new AutoDrive(-36));
+    	addSequential(new AutoTurn(90));    //if on left, 90; if on right, -90
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());
