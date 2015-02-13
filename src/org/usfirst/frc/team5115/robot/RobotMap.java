@@ -21,7 +21,7 @@ public class RobotMap {
 	public static int leftEncoder2 = 1;
 	public static int rightEncoder1 = 2;
 	public static int rightEncoder2 = 3;
-	public static int toteDetector = 4;
+	public static int toteDetector = 9;
 	public static double circumference = 84.371;
 	
 	//Winch

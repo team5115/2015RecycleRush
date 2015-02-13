@@ -10,13 +10,7 @@ public class AutoStratTest extends CommandGroup {
     public  AutoStratTest() {
     	
     	System.out.println("Started test strategy");
-    	addSequential(new AutoDrive(132));
-    	addSequential(new AutoTurn(90));
-    	addSequential(new AutoDrive(48));
-    	addSequential(new AutoTurn(180));
-    	addSequential(new AutoDrive(24));
-    	addSequential(new AutoTurn(-90));
-    	addSequential(new AutoDrive(132));
+    	addSequential(new AutoDriveToTote());
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

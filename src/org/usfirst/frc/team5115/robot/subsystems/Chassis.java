@@ -94,7 +94,7 @@ public class Chassis extends Subsystem {
     	return rightEncoder.getRate();
     }
     public boolean hitTote() {
-    	return !toteDetector.get();
+    	return toteDetector.get();
     }
     
     public void initDefaultCommand() {

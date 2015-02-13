@@ -38,7 +38,7 @@ public class AutoDriveToTote extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Timer.delay(.01);
-    	while (Robot.chassis.hitTote()) { Robot.chassis.drive(-0.5 * RobotMap.autoSpeedShort, -0.5 * RobotMap.autoSpeedShort); }
+    	while (Robot.chassis.hitTote()) { Robot.chassis.drive(-1 * RobotMap.autoSpeedShort, -1 * RobotMap.autoSpeedShort); }
     	Robot.chassis.drive(0, 0);
     }
 

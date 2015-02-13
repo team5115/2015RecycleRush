@@ -54,14 +54,16 @@ public class OI {
 		SmartDashboard.putString("DB/String 4", "Joystick Y: " + joy.getY());
 		SmartDashboard.putString("DB/String 3", "Joystick X: " + joy.getX());
 		if (Math.abs(joy.getY()) > 0.11 || Math.abs(joy.getX()) > 0.11) {
-			return (-1 * joy.getY() - joy.getX());
+			if (joy.getY() > 0) return (-1 * joy.getY() + joy.getX());
+			else return (-1 * joy.getY() - joy.getX());
 		} else {
 			return 0;
 		}
 	}
 	public double rightSpeed() {
 		if (Math.abs(joy.getY()) > 0.11 || Math.abs(joy.getX()) > 0.11) {
-			return (-1 * joy.getY() + joy.getX());
+			if (joy.getY() < 0) return (-1 * joy.getY() - joy.getX());
+			else return (-1 * joy.getY() + joy.getX());
 		} else {
 			return 0;
 		}
