@@ -13,6 +13,7 @@ import org.usfirst.frc.team5115.robot.commands.AutoStratTest;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.GimbalControl;
 import org.usfirst.frc.team5115.robot.commands.GimbalReset;
+import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.StickDrive;
 import org.usfirst.frc.team5115.robot.commands.WinchChecker;
 import org.usfirst.frc.team5115.robot.subsystems.Chassis;
@@ -43,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static AutoStratTest at;
     public static GimbalReset gr;
     public static GimbalControl gc;
+    public static Grab g;
     
     public static int mode = 0; // 0 for off; 1 for tele; 2 for auto
     
@@ -63,6 +65,7 @@ public class Robot extends IterativeRobot {
         at = new AutoStratTest();
         gr = new GimbalReset();
         gc = new GimbalControl();
+        g = new Grab();
         
         System.out.println("Started robot");
     }
@@ -107,6 +110,7 @@ public class Robot extends IterativeRobot {
         wc.start();
         //dc.start();
         gc.start();
+        g.start();
         
         System.out.println("Entered Teleop mode");
         SmartDashboard.putString("DB/String 5", "Mode: " + mode);

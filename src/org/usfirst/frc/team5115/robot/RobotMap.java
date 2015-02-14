@@ -26,10 +26,10 @@ public class RobotMap {
 	
 	//Winch
 	public static int winch = 2;
-	public static int limitTop = 5;
 	public static int limitBottom = 6;
-	public static int ultrasonicTrigger = 7;
-	public static int ultrasonicEcho = 8;
+	//public static int ultrasonicTrigger = 7;
+	//public static int ultrasonicEcho = 8;
+	public static int ultrasonic = 7;
 	public static double winchSpeed = 1;
 	
 	//Pneumatics
