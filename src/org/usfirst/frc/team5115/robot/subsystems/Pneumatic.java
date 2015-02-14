@@ -16,7 +16,6 @@ public class Pneumatic extends Subsystem {
 	
 	public Pneumatic() {
 		sol1 = new DoubleSolenoid(RobotMap.solForward, RobotMap.solReverse);
-		out();
 	}
     
     // Put methods for controlling this subsystem

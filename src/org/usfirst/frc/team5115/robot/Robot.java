@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
+import org.usfirst.frc.team5115.robot.commands.AutoStrat3;
 import org.usfirst.frc.team5115.robot.commands.AutoStratTest;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.GimbalControl;
@@ -41,6 +42,7 @@ public class Robot extends IterativeRobot {
 	public static DriveComp dc;
 	public static AutoStrat1 a1;
 	public static AutoStrat2 a2;
+	public static AutoStrat3 a3;
 	public static AutoStratTest at;
     public static GimbalReset gr;
     public static GimbalControl gc;
@@ -62,6 +64,7 @@ public class Robot extends IterativeRobot {
         dc = new DriveComp();
         a1 = new AutoStrat1();
         a2 = new AutoStrat2();
+        a3 = new AutoStrat3();
         at = new AutoStratTest();
         gr = new GimbalReset();
         gc = new GimbalControl();
@@ -81,7 +84,7 @@ public class Robot extends IterativeRobot {
         dc.start();
         gr.start();
         Robot.chassis.throttle = 1;
-        at.start();
+        a3.start();
         SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
@@ -104,13 +107,14 @@ public class Robot extends IterativeRobot {
     	mode = 1;
     	a1.cancel();
     	a2.cancel();
+    	a3.cancel();
     	at.cancel();
     	dc.cancel();
         sd.start();	// start driving
         wc.start();
         //dc.start();
         gc.start();
-        g.start();
+        pneumatic.out();
         
         System.out.println("Entered Teleop mode");
         SmartDashboard.putString("DB/String 5", "Mode: " + mode);

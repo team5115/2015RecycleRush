@@ -7,26 +7,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoStrat1 extends CommandGroup {
+public class AutoStrat3 extends CommandGroup {
     
-    public AutoStrat1() {
+    public AutoStrat3() {
     	requires(Robot.chassis);
     	requires(Robot.winch);
     	requires(Robot.pneumatic);
     	
     	addSequential(new AutoDriveToTote());
     	addSequential(new AutoLift(6));
-    	addSequential(new AutoTurn(-90));
     	addSequential(new AutoDrive(64));
-    	addSequential(new AutoDrive(35));
-    	addSequential(new AutoDrive(10));
-    	addSequential(new AutoTurn(-90));	//if on left, 90; if on right, -90	(driver's perspective)
-    	addSequential(new AutoDrive(72));
-    	addSequential(new AutoEnd());
-    	addSequential(new AutoDrive(-6));
+    	addSequential(new AutoDrive(45));
+    	addSequential(new AutoTurn(70));
     	addSequential(new AutoDrop(4));
-    	addSequential(new AutoDrive(-36));
-    	addSequential(new AutoTurn(70));    //if on left, -90; if on right, 90
+    	addSequential(new AutoDrive(-24));
+    	addSequential(new AutoTurn(-70));
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());
