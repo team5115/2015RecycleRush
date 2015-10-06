@@ -25,7 +25,7 @@ public class WinchChecker extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.winch.hitLimit()) { hw.start(); }
+    	if (Robot.winch.hitLimit() /* || Robot.winch.height() <= 11 */) { hw.start(); }
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat1;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat2;
 import org.usfirst.frc.team5115.robot.commands.AutoStrat3;
+import org.usfirst.frc.team5115.robot.commands.AutoStrat4;
+import org.usfirst.frc.team5115.robot.commands.AutoStrat5;
+import org.usfirst.frc.team5115.robot.commands.AutoStrat6;
 import org.usfirst.frc.team5115.robot.commands.AutoStratTest;
 import org.usfirst.frc.team5115.robot.commands.DriveComp;
 import org.usfirst.frc.team5115.robot.commands.GimbalControl;
@@ -43,6 +46,9 @@ public class Robot extends IterativeRobot {
 	public static AutoStrat1 a1;
 	public static AutoStrat2 a2;
 	public static AutoStrat3 a3;
+	public static AutoStrat4 a4;
+	public static AutoStrat5 a5;
+	public static AutoStrat6 a6;
 	public static AutoStratTest at;
     public static GimbalReset gr;
     public static GimbalControl gc;
@@ -65,6 +71,9 @@ public class Robot extends IterativeRobot {
         a1 = new AutoStrat1();
         a2 = new AutoStrat2();
         a3 = new AutoStrat3();
+        a4 = new AutoStrat4();
+        a5 = new AutoStrat5();
+        a6 = new AutoStrat6();
         at = new AutoStratTest();
         gr = new GimbalReset();
         gc = new GimbalControl();
@@ -83,8 +92,9 @@ public class Robot extends IterativeRobot {
         wc.start();
         dc.start();
         gr.start();
-        Robot.chassis.throttle = 1;
-        a3.start();
+        chassis.throttle = 1;
+       // pneumatic.out();
+       // a6.start();
         SmartDashboard.putString("DB/String 5", "Mode: " + mode);
     }
 
@@ -108,6 +118,9 @@ public class Robot extends IterativeRobot {
     	a1.cancel();
     	a2.cancel();
     	a3.cancel();
+    	a4.cancel();
+    	a5.cancel();
+    	a6.cancel();
     	at.cancel();
     	dc.cancel();
         sd.start();	// start driving
@@ -137,7 +150,6 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putBoolean("DB/LED 0", chassis.hitTote());
         SmartDashboard.putBoolean("DB/LED 1", winch.hitLimit());
-        
         Timer.delay(0.005);     
     }
     

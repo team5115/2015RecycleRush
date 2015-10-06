@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 /**
  *
  */
@@ -26,7 +24,6 @@ public class Chassis extends Subsystem {
     private Encoder leftEncoder;
     private Encoder rightEncoder;
     private DigitalInput toteDetector;
-
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
@@ -43,6 +40,7 @@ public class Chassis extends Subsystem {
         
         leftEncoder.reset();
         rightEncoder.reset();
+        
     }
 
  
@@ -53,7 +51,8 @@ public class Chassis extends Subsystem {
     }
     
     public void drive() {
-    	if (Robot.mode == 1) throttle = Robot.oi.throttle();
+    	// if (Robot.mode == 1) throttle = 0.8;
+    	if (Robot.mode == 1) throttle = 0.7 + Robot.oi.throttle() * 0.1;
     	
     	if (leftSpeed > 0) {
             leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor - leftOffset);
@@ -61,10 +60,10 @@ public class Chassis extends Subsystem {
     		leftMotor.set(leftSpeed * throttle * RobotMap.speedFactor + leftOffset);
     	}
         rightMotor.set(rightSpeed * throttle * RobotMap.speedFactor);
-        if (leftSpeed * throttle > 1) { leftMotor.set(-1); }
-        if (leftSpeed * throttle < -1) { leftMotor.set(1); }
-        if (rightSpeed * throttle > 1) { rightMotor.set(-1); }
-        if (rightSpeed * throttle < -1) { rightMotor.set(1); }
+        if (leftSpeed * throttle > 1) { leftMotor.set(1); }
+        if (leftSpeed * throttle < -1) { leftMotor.set(-1); }
+        if (rightSpeed * throttle > 1) { rightMotor.set(1); }
+        if (rightSpeed * throttle < -1) { rightMotor.set(-1); }
         
         SmartDashboard.putString("DB/String 0", "Throttle: " + String.format("%2f", throttle));
         SmartDashboard.putString("DB/String 1", "Left: " + String.format("%2f", leftMotor.get()));

@@ -45,7 +45,7 @@ public class Winch extends Subsystem {
 	}
 	
 	public double height() {
-		return (ultra.getAverageVoltage() / 0.0049) / 2.45;
+		return ultra.getAverageVoltage() * 87.736 + 0.362;
 	}
 
     public void initDefaultCommand() {

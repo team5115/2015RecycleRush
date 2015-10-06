@@ -44,7 +44,7 @@ public class AutoDrop extends Command {
     protected void end() {
     	Timer.delay(time);
     	Robot.winch.hold();
-    	Robot.pneumatic.out();
+    	Robot.pneumatic.toggle();
     }
 
     // Called when another command which requires one or more of the same

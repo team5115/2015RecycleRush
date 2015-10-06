@@ -1,43 +1,40 @@
-
 package org.usfirst.frc.team5115.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team5115.robot.Robot;
-import org.usfirst.frc.team5115.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AutoDriveToTote extends Command {
+public class SetThrottle extends Command {
+	
+	private double number;
 
-    public AutoDriveToTote() {
+    public SetThrottle(double n) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.chassis);
+        // eg. requires(chassis);
+    	requires(Robot.chassis);
+    	number = n;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.startEncoders();
-    	Robot.chassis.drive(RobotMap.autoSpeedShort, RobotMap.autoSpeedShort);
-    	System.out.println("started driving");
+    	Robot.chassis.throttle = number;
+    	System.out.println(number);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //return (Robot.chassis.leftDist() + Robot.chassis.rightDist()) / 2 >= dist || Robot.chassis.hitTote();
-    	return Robot.chassis.hitTote();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.chassis.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

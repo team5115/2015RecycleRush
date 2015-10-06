@@ -4,11 +4,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team5115.robot.commands.AutoLift;
 import org.usfirst.frc.team5115.robot.commands.GimbalReset;
 import org.usfirst.frc.team5115.robot.commands.Grab;
 import org.usfirst.frc.team5115.robot.commands.HoldWinch;
 import org.usfirst.frc.team5115.robot.commands.MoveWinch;
+import org.usfirst.frc.team5115.robot.commands.SetThrottle;
 
 import java.lang.Math;
 
@@ -27,6 +29,8 @@ public class OI {
 	Button downWinch;
 	Button raiseHeightOfTote;
 	Button gimbalReset;
+	Button fastButton;
+	Button slowButton;
 	
 	public OI() {
 		// Definitions: assign buttons to their numbers on the controller
@@ -37,6 +41,8 @@ public class OI {
 		upWinch = new JoystickButton(joy, 5);
 		downWinch = new JoystickButton(joy, 3);
 		raiseHeightOfTote = new JoystickButton(joy, 12);
+		fastButton = new JoystickButton(joy, 7);
+		slowButton = new JoystickButton(joy, 9);
 		
 		// Link the buttons to commands
 		grab.whenPressed(new Grab());
@@ -45,8 +51,10 @@ public class OI {
 		upWinch.whenReleased(new HoldWinch());
 		downWinch.whenReleased(new HoldWinch());
 		gimbalReset.whenPressed(new GimbalReset());
+		fastButton.whenPressed(new SetThrottle(0.8));
+		slowButton.whenPressed(new SetThrottle(0.7));
 		
-		raiseHeightOfTote.whenReleased(new AutoLift(14));
+		raiseHeightOfTote.whenReleased(new AutoLift(15));
 	}
 	
 	// Return speeds for each side (not including throttle) for the StickDrive command

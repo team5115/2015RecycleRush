@@ -13,15 +13,14 @@ public class AutoStrat3 extends CommandGroup {
     	requires(Robot.chassis);
     	requires(Robot.winch);
     	requires(Robot.pneumatic);
-    	
+
+    	addSequential(new AutoInitWinch());
     	addSequential(new AutoDriveToTote());
     	addSequential(new AutoLift(6));
-    	addSequential(new AutoDrive(64));
-    	addSequential(new AutoDrive(45));
-    	addSequential(new AutoTurn(70));
-    	addSequential(new AutoDrop(4));
+    	addSequential(new AutoDrive(156));
+    	addSequential(new AutoTurn(90));
+    	addSequential(new AutoDrop(6));
     	addSequential(new AutoDrive(-24));
-    	addSequential(new AutoTurn(-70));
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());
